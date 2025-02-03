@@ -10,4 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('apiHomeUsers');
-Route::get('/users/{id}', [UserController::class, 'show'])->name('apiShowUsers');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('apiShowUser');
+Route::post('/users', [UserController::class, 'store'])->name('apiStoreUser');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('apiUpdateUser');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('apiDestroyUser');
