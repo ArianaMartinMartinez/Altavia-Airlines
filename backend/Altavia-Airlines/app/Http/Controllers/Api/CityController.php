@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\City;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
@@ -23,7 +24,25 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required | string',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Introduced data is not correct',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $validated = $validator->validate();
+
+        $city = City::create([
+            'name' => $validated['name'],
+        ]);
+        $city->save();
+
+        return response()->json($city, 201);
     }
 
     /**
@@ -41,7 +60,27 @@ class CityController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $city = City::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required | string',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Introduced data is not correct',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $validated = $validator->validate();
+
+        $city->update([
+            'name' => $validated['name'],
+        ]);
+        $city->save();
+
+        return response()->json($city, 200);
     }
 
     /**
@@ -49,6 +88,12 @@ class CityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $city = City::findOrFail($id);
+        $city->delete();
+
+        return response()->json([
+            'message' => 'City deleted',
+            'city' => $city,
+        ], 200);
     }
 }
