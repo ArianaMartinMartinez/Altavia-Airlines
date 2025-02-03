@@ -19,3 +19,6 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('apiDestr
 // CITIES
 Route::get('/cities', [CityController::class, 'index'])->name('apiHomeCities');
 Route::get('/cities/{id}', [CityController::class, 'show'])->name('apiShowCity');
+Route::post('/cities', [CityController::class, 'store'])->name('apiStoreCity');
+Route::put('/cities/{id}', [CityController::class, 'update'])->name('apiUpdateCity');
+Route::delete('/cities/{id}', [CityController::class, 'destroy'])->name('apiDestroyCity');
