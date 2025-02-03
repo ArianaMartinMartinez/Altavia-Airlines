@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->date('date');
+            $table->float('price');
             $table->unsignedBigInteger('airplane_id');
             $table->timestamps();
 

@@ -16,6 +16,7 @@ class Flight extends Model
 
     protected $fillable = [
         'date',
+        'price',
         'airplane_id',
     ];
 
