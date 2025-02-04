@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Airplane;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AirplaneController extends Controller
 {
@@ -23,7 +24,27 @@ class AirplaneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required | string',
+            'seats' => 'required | integer',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Introduced data is not correct',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $validated = $validator->validate();
+
+        $airplane = Airplane::create([
+            'name' => $validated['name'],
+            'seats' => $validated['seats'],
+        ]);
+        $airplane->save();
+
+        return response()->json($airplane, 201);
     }
 
     /**
@@ -41,7 +62,29 @@ class AirplaneController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $airplane = Airplane::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required | string',
+            'seats' => 'required | integer',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Introduced data is not correct',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $validated = $validator->validate();
+
+        $airplane->update([
+            'name' => $validated['name'],
+            'seats' => $validated['seats'],
+        ]);
+        $airplane->save();
+
+        return response()->json($airplane, 200);
     }
 
     /**
@@ -49,6 +92,12 @@ class AirplaneController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $airplane = Airplane::findOrFail($id);
+        $airplane->delete();
+
+        return response()->json([
+            'message' => 'Airplane deleted',
+            'airplane' => $airplane,
+        ], 200);
     }
 }
