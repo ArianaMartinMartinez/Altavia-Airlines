@@ -27,3 +27,6 @@ Route::delete('/cities/{id}', [CityController::class, 'destroy'])->name('apiDest
 // AIRPLANES
 Route::get('/airplanes', [AirplaneController::class, 'index'])->name('apiHomeAirplanes');
 Route::get('/airplanes/{id}', [AirplaneController::class, 'show'])->name('apiShowAirplane');
+Route::post('/airplanes', [AirplaneController::class, 'store'])->name('apiStoreAirplane');
+Route::put('/airplanes/{id}', [AirplaneController::class, 'update'])->name('apiUpdateAirplane');
+Route::delete('/airplanes/{id}', [AirplaneController::class, 'destroy'])->name('apiDestroyAirplane');
