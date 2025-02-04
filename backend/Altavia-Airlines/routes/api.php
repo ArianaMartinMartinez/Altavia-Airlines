@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AirplaneController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -22,3 +23,7 @@ Route::get('/cities/{id}', [CityController::class, 'show'])->name('apiShowCity')
 Route::post('/cities', [CityController::class, 'store'])->name('apiStoreCity');
 Route::put('/cities/{id}', [CityController::class, 'update'])->name('apiUpdateCity');
 Route::delete('/cities/{id}', [CityController::class, 'destroy'])->name('apiDestroyCity');
+
+// AIRPLANES
+Route::get('/airplanes', [AirplaneController::class, 'index'])->name('apiHomeAirplanes');
+Route::get('/airplanes/{id}', [AirplaneController::class, 'show'])->name('apiShowAirplane');
