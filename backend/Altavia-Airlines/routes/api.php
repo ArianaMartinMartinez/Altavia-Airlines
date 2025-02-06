@@ -36,5 +36,5 @@ Route::delete('/airplanes/{id}', [AirplaneController::class, 'destroy'])->name('
 Route::get('/flights', [FlightController::class, 'index'])->name('apiHomeFlights');
 Route::get('/flights/{id}', [FlightController::class, 'show'])->name('apiShowFlight');
 Route::post('/flights', [FlightController::class, 'store'])->name('apiStoreFlight');
-Route::put('/flights/{id}', [FlightController::class, 'update'])->name('appiUpdateFlight');
+Route::put('/flights/{id}', [FlightController::class, 'update'])->name('apiUpdateFlight');
 Route::delete('/flights/{id}', [FlightController::class, 'destroy'])->name('apiDestroyFlight');
