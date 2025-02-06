@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Airplane;
 use App\Models\Flight;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FlightController extends Controller
 {
@@ -23,7 +25,29 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'date' => 'required | date',
+            'price' => 'required | numeric | regex:"/^\d+(\.\d{1,2})?$/"',
+            'airplane_id' => 'required | exists:airplanes,id',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Introduced data is not correct',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $validated = $validator->validate();
+
+        $flight = Flight::create([
+            'date' => $validated['date'],
+            'price' => $validated['price'],
+            'airplane_id' => $validated['airplane_id'],
+        ]);
+        $flight->save();
+
+        return response()->json($flight, 201);
     }
 
     /**
@@ -41,7 +65,31 @@ class FlightController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $flight = Flight::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'date' => 'required | date',
+            'price' => 'required | numeric | regex:"/^\d+(\.\d{1,2})?$/"',
+            'airplane_id' => 'required | exists:airplanes,id',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'message' => 'Introduced data is not correct',
+                'errors' => $validator->errors(),
+            ], 400);
+        }
+
+        $validated = $validator->validate();
+
+        $flight->update([
+            'date' => $validated['date'],
+            'price' => $validated['price'],
+            'airplane_id' => $validated['airplane_id'],
+        ]);
+        $flight->save();
+
+        return response()->json($flight, 200);
     }
 
     /**
@@ -49,6 +97,12 @@ class FlightController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $flight = Flight::with('airplane', 'cities')->findOrFail($id);
+        $flight->delete();
+
+        return response()->json([
+            'message' => 'Flight deleted',
+            'flight' => $flight,
+        ]);
     }
 }
