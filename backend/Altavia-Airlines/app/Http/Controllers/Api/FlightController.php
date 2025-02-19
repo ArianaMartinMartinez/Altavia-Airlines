@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Airplane;
 use App\Models\Flight;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class FlightController extends Controller
 {
@@ -104,5 +106,41 @@ class FlightController extends Controller
             'message' => 'Flight deleted',
             'flight' => $flight,
         ]);
+    }
+
+    public function bookFlight(string $id) {
+        $user = JWTAuth::user();
+        $flight = Flight::findOrFail($id);
+
+        //hay que controlar si el vuelo no está completo
+
+        if($user->flights()->where('flight_id', $id)->exists()) {
+            return response()->json([
+                'message' => 'You have already booked this flight',
+            ], 400);
+        }
+
+        $user->flights()->attach($flight);
+
+        return response()->json([
+            'message' => 'Flight booked successfully',
+        ], 200);
+    }
+
+    public function cancelFlight(string $id) {
+        $user = JWTAuth::user();
+        $flight = Flight::findOrFail($id);
+
+        if(!$user->flights()->where('flight_id', $id)->exists()) {
+            return response()->json([
+                'message' => "You haven't booked this flight",
+            ], 400);
+        }
+
+        $user->flights()->detach($flight);
+
+        return response()->json([
+            'message' => 'Flight canceled successfully',
+        ], 200);
     }
 }
