@@ -17,7 +17,7 @@ class FlightController extends Controller
      */
     public function index()
     {
-        $flights = Flight::with('airplane', 'cities')->get();
+        $flights = Flight::with('airplane', 'departure', 'arrival')->withCount('users')->get();
 
         return response()->json($flights, 200);
     }
@@ -31,7 +31,15 @@ class FlightController extends Controller
             'date' => 'required | date',
             'price' => 'required | numeric | regex:"/^\d+(\.\d{1,2})?$/"',
             'airplane_id' => 'required | exists:airplanes,id',
+            'departure_id' => 'required | exists:cities,id',
+            'arrival_id' => 'required | exists:cities,id',
         ]);
+
+        if ($request->departure_id == $request->arrival_id) {
+            return response()->json([
+                'message' => 'Departure and arrival cities must be different',
+            ], 400);
+        }
 
         if($validator->fails()) {
             return response()->json([
@@ -46,6 +54,8 @@ class FlightController extends Controller
             'date' => $validated['date'],
             'price' => $validated['price'],
             'airplane_id' => $validated['airplane_id'],
+            'departure_id' => $validated['departure_id'],
+            'arrival_id' => $validated['arrival_id'],
         ]);
         $flight->save();
 
@@ -57,7 +67,7 @@ class FlightController extends Controller
      */
     public function show(string $id)
     {
-        $flight = Flight::with('airplane', 'cities')->findOrFail($id);
+        $flight = Flight::with('airplane', 'departure', 'arrival', 'users')->withCount('users')->findOrFail($id);
 
         return response()->json($flight, 200);
     }
@@ -73,6 +83,8 @@ class FlightController extends Controller
             'date' => 'required | date',
             'price' => 'required | numeric | regex:"/^\d+(\.\d{1,2})?$/"',
             'airplane_id' => 'required | exists:airplanes,id',
+            'departure_id' => 'required | exists:cities,id',
+            'arrival_id' => 'required | exists:cities,id',
         ]);
 
         if($validator->fails()) {
@@ -88,6 +100,8 @@ class FlightController extends Controller
             'date' => $validated['date'],
             'price' => $validated['price'],
             'airplane_id' => $validated['airplane_id'],
+            'departure_id' => $validated['departure_id'],
+            'arrival_id' => $validated['arrival_id'],
         ]);
         $flight->save();
 
@@ -99,7 +113,7 @@ class FlightController extends Controller
      */
     public function destroy(string $id)
     {
-        $flight = Flight::with('airplane', 'cities')->findOrFail($id);
+        $flight = Flight::with('airplane', 'departure', 'arrival')->findOrFail($id);
         $flight->delete();
 
         return response()->json([
@@ -110,9 +124,16 @@ class FlightController extends Controller
 
     public function bookFlight(string $id) {
         $user = JWTAuth::user();
-        $flight = Flight::findOrFail($id);
+        $flight = Flight::withCount('users')->findOrFail($id);
 
-        //hay que controlar si el vuelo no está completo
+        $airplaneSeats = $flight->airplane->seats;
+        $bookedSeats = $flight->users_count;
+
+        if($bookedSeats >= $airplaneSeats) {
+            return response()->json([
+                'message' => 'No seats available for this flight',
+            ], 400);
+        }
 
         if($user->flights()->where('flight_id', $id)->exists()) {
             return response()->json([

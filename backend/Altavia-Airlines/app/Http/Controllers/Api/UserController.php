@@ -70,7 +70,6 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required | string',
-            'email' => 'required | string | email | unique:users,email',
             'password' => 'required',
             'role' => 'nullable | in:admin,user',
         ]);
@@ -86,7 +85,6 @@ class UserController extends Controller
 
         $user->update([
             'name' => $validated['name'],
-            'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
             'role' => $validated['role'] ?? 'user',
         ]);

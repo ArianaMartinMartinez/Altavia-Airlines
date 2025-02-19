@@ -26,7 +26,7 @@ class AirplaneController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required | string',
-            'seats' => 'required | integer',
+            'seats' => 'required | integer | min:1',
         ]);
 
         if($validator->fails()) {
@@ -66,7 +66,7 @@ class AirplaneController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required | string',
-            'seats' => 'required | integer',
+            'seats' => 'required | integer | min:1',
         ]);
 
         if($validator->fails()) {
