@@ -16,9 +16,13 @@ return new class extends Migration
             $table->date('date');
             $table->float('price');
             $table->unsignedBigInteger('airplane_id');
+            $table->unsignedBigInteger('departure_id');
+            $table->unsignedBigInteger('arrival_id');
             $table->timestamps();
 
             $table->foreign('airplane_id')->references('id')->on('airplanes')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('departure_id')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('arrival_id')->references('id')->on('cities')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -27,10 +27,7 @@ class DatabaseSeeder extends Seeder
 
         Airplane::factory(15)->create();
 
-        Flight::factory(25)->create()->each(function($flight) {
-            $cities = City::all()->random()->limit(2)->pluck('id');
-            $flight->cities()->attach($cities);
-        });
+        Flight::factory(25)->create();
 
         User::factory(30)->create()->each(function($user) {
             $flights = Flight::all()->random()->limit(rand(1,10))->pluck('id');

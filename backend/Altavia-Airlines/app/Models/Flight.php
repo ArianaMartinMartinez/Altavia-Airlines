@@ -18,14 +18,20 @@ class Flight extends Model
         'date',
         'price',
         'airplane_id',
+        'departure_id',
+        'arrival_id',
     ];
 
     public function airplane(): BelongsTo {
         return $this->belongsTo(Airplane::class, 'airplane_id');
     }
 
-    public function cities(): BelongsToMany {
-        return $this->belongsToMany(City::class, 'city_flight');
+    public function departure(): BelongsTo {
+        return $this->belongsTo(City::class, 'departure_id');
+    }
+
+    public function arrival(): BelongsTo {
+        return $this->belongsTo(City::class, 'arrival_id');
     }
 
     public function users(): BelongsToMany {
