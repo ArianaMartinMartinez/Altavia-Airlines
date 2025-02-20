@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Api;
 
+use App\Models\Airplane;
+use Tests\TestCase;
 use App\Models\City;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Flight;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CityTest extends TestCase
 {
@@ -139,5 +141,29 @@ class CityTest extends TestCase
         $response = $this->get(route('apiHomeCities'));
         $response->assertStatus(200)
             ->assertJsonCount(1);
+    }
+
+    public function test_CheckIfCityHasManyDepartures() {
+        Airplane::factory(2)->create();
+        $city = City::factory()->create();
+
+        $flight1 = Flight::factory()->create(['departure_id' => $city->id, 'arrival_id' => City::factory()->create()->id]);
+        $flight2 = Flight::factory()->create(['departure_id' => $city->id, 'arrival_id' => City::factory()->create()->id]);
+
+        $this->assertCount(2, $city->departures);
+        $this->assertTrue($city->departures->contains($flight1));
+        $this->assertTrue($city->departures->contains($flight2));
+    }
+
+    public function test_CheckIfCityHasManyArrivals() {
+        Airplane::factory(2)->create();
+        $city = City::factory()->create();
+
+        $flight1 = Flight::factory()->create(['departure_id' => City::factory()->create()->id, 'arrival_id' => $city->id]);
+        $flight2 = Flight::factory()->create(['departure_id' => City::factory()->create()->id, 'arrival_id' => $city->id]);
+
+        $this->assertCount(2, $city->arrivals);
+        $this->assertTrue($city->arrivals->contains($flight1));
+        $this->assertTrue($city->arrivals->contains($flight2));
     }
 }

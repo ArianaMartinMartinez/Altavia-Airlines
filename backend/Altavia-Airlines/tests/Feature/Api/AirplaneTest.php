@@ -5,6 +5,7 @@ namespace Tests\Feature\Api;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Airplane;
+use App\Models\Flight;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -163,5 +164,16 @@ class AirplaneTest extends TestCase
         ]);
         $response->assertStatus(200)
             ->assertJsonCount(1);
+    }
+
+    public function test_CheckIfAirplaneHasManyFlightsWithApi() {
+        $airplane = Airplane::factory()->create();
+
+        $flight1 = Flight::factory()->create();
+        $flight2 = Flight::factory()->create();
+
+        $this->assertCount(2, $airplane->flights);
+        $this->assertTrue($airplane->flights->contains($flight1));
+        $this->assertTrue($airplane->flights->contains($flight2));
     }
 }
