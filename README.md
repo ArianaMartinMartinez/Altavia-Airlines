@@ -1,4 +1,4 @@
-# Altavia-Airlines 🧑‍✈️✈️
+# Altavia-Airlines ✈️
 
 >[!CAUTION]
 >Please read all the points of the README in order to make good use of the project. Thank you.
