@@ -54,11 +54,34 @@ class FlightTest extends TestCase
         return $response->json('message');
     }
 
-    public function test_CheckIfCanReceiveAllFlightsWihtApi() {
+    public function test_CheckIfCanReceiveAllFutureFlightsWihtApi() {
+        City::factory(5)->create();
+        Airplane::factory(5)->create();
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 2,
+            'arrival_id' => 5,
+        ]);
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 120,
+            'airplane_id' => 4,
+            'departure_id' => 1,
+            'arrival_id' => 3,
+        ]);
+
+        $response = $this->get(route('apiFutureFlights'));
+        $response->assertStatus(200)
+            ->assertJsonCount(2);
+    }
+
+    public function test_CheckIfCanReceiveAllPastFlightsWihtApi() {
         Airplane::factory(5)->create();
         Flight::factory(3)->create();
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(3);
     }
@@ -99,7 +122,7 @@ class FlightTest extends TestCase
             'arrival_id' => 5,
         ]);
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(1);
     }
@@ -161,7 +184,7 @@ class FlightTest extends TestCase
 
         $response->assertStatus(201);
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(1)
             ->assertJsonFragment($data);
@@ -176,7 +199,7 @@ class FlightTest extends TestCase
         ]);
         $data = ['date' => '2024-05-10'];
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(1)
             ->assertJsonFragment($data);
@@ -199,7 +222,7 @@ class FlightTest extends TestCase
 
         $response->assertStatus(201);
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(1)
             ->assertJsonFragment($data);
@@ -224,7 +247,7 @@ class FlightTest extends TestCase
         City::factory(5)->create();
         Flight::factory(2)->create();
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(2);
 
@@ -232,7 +255,7 @@ class FlightTest extends TestCase
             'token' => $token,
         ]);
 
-        $response = $this->get(route('apiHomeFlights'));
+        $response = $this->get(route('apiPastFlights'));
         $response->assertStatus(200)
             ->assertJsonCount(1);
     }
@@ -241,7 +264,13 @@ class FlightTest extends TestCase
         $token = $this->authUser();
         Airplane::factory()->create();
         City::factory(5)->create();
-        Flight::factory()->create();
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 2,
+            'arrival_id' => 5,
+        ]);
 
         $response = $this->post(route('apiBookFlight', 1), [
             'token' => $token,
@@ -256,7 +285,13 @@ class FlightTest extends TestCase
         $token = $this->authUser();
         Airplane::factory()->create();
         City::factory(5)->create();
-        Flight::factory()->create();
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 2,
+            'arrival_id' => 5,
+        ]);
 
         $response = $this->post(route('apiBookFlight', 1), [
             'token' => $token,
@@ -282,7 +317,13 @@ class FlightTest extends TestCase
             'seats' => 1
         ]);
         City::factory(2)->create();
-        Flight::factory()->create();
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 1,
+            'arrival_id' => 2,
+        ]);
 
         $response = $this->post(route('apiBookFlight', 1), [
             'token' => $tokenAdmin,
@@ -308,7 +349,13 @@ class FlightTest extends TestCase
         $token = $this->authUser();
         Airplane::factory()->create();
         City::factory(2)->create();
-        Flight::factory()->create();
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 1,
+            'arrival_id' => 2,
+        ]);
 
         $response = $this->post(route('apiBookFlight', 1), [
             'token' => $token,
@@ -331,7 +378,13 @@ class FlightTest extends TestCase
         $token = $this->authUser();
         Airplane::factory()->create();
         City::factory(2)->create();
-        Flight::factory()->create();
+        Flight::factory()->create([
+            'date' => '2999-12-12',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 1,
+            'arrival_id' => 2,
+        ]);
 
         $response = $this->post(route('apiCancelFlight', 1), [
             'token' => $token,
