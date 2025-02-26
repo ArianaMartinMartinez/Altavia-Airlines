@@ -121,6 +121,27 @@ class FlightController extends Controller
         ]);
     }
 
+    public function indexBookings() {
+        $user = JWTAuth::user();
+
+        $bookings = $user->flights()->with('airplane', 'departure', 'arrival')->orderBy('date', 'asc')->get();
+
+        $bookings->transform(function ($flight) {
+            $flight->date = Carbon::parse($flight->date)->toDateString();
+            return $flight;
+        });
+
+        $futureBookings = $bookings->where('date', '>=', Carbon::today())->values();
+        $pastBookings = $bookings->where('date', '<', Carbon::today())->sortByDesc('date')->values();
+        $nextBooking = $futureBookings->first();
+
+        return response()->json([
+            'next_booking' => $nextBooking,
+            'future_bookings' => $futureBookings->slice(1)->values(),
+            'past_bookings' => $pastBookings,
+        ], 200);
+    }
+
     public function bookFlight(string $id) {
         $user = JWTAuth::user();
         $flight = Flight::withCount('users')->findOrFail($id);

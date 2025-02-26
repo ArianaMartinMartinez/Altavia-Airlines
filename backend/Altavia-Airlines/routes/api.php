@@ -58,5 +58,7 @@ Route::get('/flightsFuture', [FlightController::class, 'indexFutureFlights'])->n
 Route::get('/flightsPast', [FlightController::class, 'indexPastFlights'])->name('apiPastFlights');
 Route::get('/filterFutureFlights', [FlightController::class, 'filterFutureFlights'])->name('apiFiltereFutureFlights');
 Route::get('/filterPastFlights', [FlightController::class, 'filterPastFlights'])->name('apiFilterePastFlights');
+
+Route::get('/bookings', [FlightController::class, 'indexBookings'])->name('apiHomeBookings');
 Route::post('/book/{id}', [FlightController::class, 'bookFlight'])->middleware('auth:api')->name('apiBookFlight');
 Route::post('/cancel/{id}', [FlightController::class, 'cancelFlight'])->middleware('auth:api')->name('apiCancelFlight');
