@@ -125,6 +125,13 @@ class FlightController extends Controller
         $user = JWTAuth::user();
         $flight = Flight::withCount('users')->findOrFail($id);
 
+        $flightDate = Carbon::parse($flight->date);
+        if($flightDate->lt(Carbon::today())) {
+            return response()->json([
+                'message' => "You can't book a past flight",
+            ], 400);
+        }
+
         $airplaneSeats = $flight->airplane->seats;
         $bookedSeats = $flight->users_count;
 
@@ -150,6 +157,13 @@ class FlightController extends Controller
     public function cancelFlight(string $id) {
         $user = JWTAuth::user();
         $flight = Flight::findOrFail($id);
+
+        $flightDate = Carbon::parse($flight->date);
+        if($flightDate->lt(Carbon::today())) {
+            return response()->json([
+                'message' => "You can't cancel a past flight",
+            ], 400);
+        }
 
         if(!$user->flights()->where('flight_id', $id)->exists()) {
             return response()->json([
