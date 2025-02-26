@@ -3,28 +3,36 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Airplane;
 use App\Models\Flight;
-use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class FlightController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function indexFutureFlights()
     {
-        $flights = Flight::with('airplane', 'departure', 'arrival')->withCount('users')->get();
+        $flights = Flight::with('airplane', 'departure', 'arrival')
+            ->withCount('users')
+            ->where('date', '>=', Carbon::today())
+            ->orderBy('date', 'asc')
+            ->get();
 
         return response()->json($flights, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function indexPastFlights() 
+    {
+        $flights = Flight::with('airplane', 'departure', 'arrival')
+            ->withCount('users')
+            ->where('date', '<', Carbon::today())
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return response()->json($flights, 200);
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -62,9 +70,6 @@ class FlightController extends Controller
         return response()->json($flight, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $flight = Flight::with('airplane', 'departure', 'arrival', 'users')->withCount('users')->findOrFail($id);
@@ -72,9 +77,6 @@ class FlightController extends Controller
         return response()->json($flight, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $flight = Flight::findOrFail($id);
@@ -108,9 +110,6 @@ class FlightController extends Controller
         return response()->json($flight, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $flight = Flight::with('airplane', 'departure', 'arrival')->findOrFail($id);
@@ -163,5 +162,53 @@ class FlightController extends Controller
         return response()->json([
             'message' => 'Flight canceled successfully',
         ], 200);
+    }
+
+    public function filterFutureFlights(Request $request) {
+        $query = Flight::query();
+
+        if($request->has('departure_id')) {
+            $query->where('departure_id', '=', $request->input('departure_id'));
+        }
+
+        if($request->has('arrival_id')) {
+            $query->where('arrival_id', '=', $request->input('arrival_id'));
+        }
+
+        if($request->has('date')) {
+            $query->where('date', '=', $request->input('date'));
+        }
+
+        $flights = $query->with('airplane', 'departure', 'arrival')
+            ->withCount('users')
+            ->where('date', '>=', Carbon::today())
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return response()->json($flights, 200);
+    }
+
+    public function filterPastFlights(Request $request) {
+        $query = Flight::query();
+
+        if($request->has('departure_id')) {
+            $query->where('departure_id', '=', $request->input('departure_id'));
+        }
+
+        if($request->has('arrival_id')) {
+            $query->where('arrival_id', '=', $request->input('arrival_id'));
+        }
+
+        if($request->has('date')) {
+            $query->where('date', '=', $request->input('date'));
+        }
+
+        $flights = $query->with('airplane', 'departure', 'arrival')
+            ->withCount('users')
+            ->where('date', '<', Carbon::today())
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return response()->json($flights, 200);
     }
 }

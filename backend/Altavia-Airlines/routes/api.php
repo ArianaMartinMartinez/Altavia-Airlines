@@ -54,6 +54,9 @@ Route::middleware(['auth:api', 'isAdmin'])->group(function() {
 Route::get('/cities', [CityController::class, 'index'])->name('apiHomeCities');
 Route::get('/cities/{id}', [CityController::class, 'show'])->name('apiShowCity');
 
-Route::get('/flights', [FlightController::class, 'index'])->name('apiHomeFlights');
+Route::get('/flightsFuture', [FlightController::class, 'indexFutureFlights'])->name('apiFutureFlights');
+Route::get('/flightsPast', [FlightController::class, 'indexPastFlights'])->name('apiPastFlights');
+Route::get('/filterFutureFlights', [FlightController::class, 'filterFutureFlights'])->name('apiFiltereFutureFlights');
+Route::get('/filterPastFlights', [FlightController::class, 'filterPastFlights'])->name('apiFilterePastFlights');
 Route::post('/book/{id}', [FlightController::class, 'bookFlight'])->middleware('auth:api')->name('apiBookFlight');
 Route::post('/cancel/{id}', [FlightController::class, 'cancelFlight'])->middleware('auth:api')->name('apiCancelFlight');
