@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --white: #EFFBFC;
+    --black: #122E3A;
+    --red: #D96277;
+    --lightBlue: #B4E5ED;
+    --blue: #50B9CE;
+    --darkBlue: #257B95;
+    --green: #49BF8F;
+}
+
+html, body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+li {
+    list-style: none;
+}
