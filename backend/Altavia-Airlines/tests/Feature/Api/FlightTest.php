@@ -281,6 +281,27 @@ class FlightTest extends TestCase
             ->assertJsonFragment($data);
     }
 
+    public function test_CheckIfReturnErrorIfBookPastFlightWithApi() {
+        $token = $this->authUser();
+        Airplane::factory()->create();
+        City::factory(5)->create();
+        Flight::factory()->create([
+            'date' => '2010-01-01',
+            'price' => 200,
+            'airplane_id' => 1,
+            'departure_id' => 2,
+            'arrival_id' => 5,
+        ]);
+
+        $response = $this->post(route('apiBookFlight', 1), [
+            'token' => $token,
+        ]);
+        $data = ["message" => "You can't book a past flight"];
+
+        $response->assertStatus(400)
+            ->assertJsonFragment($data);
+    }
+
     public function test_CheckIfReturnErrorIfBookSameFlightWithApi() {
         $token = $this->authUser();
         Airplane::factory()->create();
