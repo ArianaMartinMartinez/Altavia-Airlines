@@ -1,0 +1,18 @@
+.filterForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.inputsFilter {
+    width: 50%;
+}
+
+.btn-danger {
+    margin: 0;
+}
+.btn-danger:hover {
+    background-color: var(--darkRed) !important;
+}

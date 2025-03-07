@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <form class="filterForm" [formGroup]="filterForm" (submit)="submit()">
+        <div class="input-group inputsFilter">
+            <select id="departure" formControlName="departure" class="form-select">
+                <option value="">Departure</option>
+                <option *ngFor="let city of citiesList" [value]="city.id">{{ city.name }}</option>
+            </select>
+
+            <select id="arrival" formControlName="arrival" class="form-select">
+                <option value="">Arrival</option>
+                <option *ngFor="let city of citiesList" [value]="city.id">{{ city.name }}</option>
+            </select>
+
+            <input type="date" id="date" formControlName="date" class="form-control">
+            <div *ngIf="filterForm.get('date')?.invalid && filterForm.get('date')?.touched"
+                class="text-danger">
+                Date must be today or greater
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger">Search</button>
+    </form>
+</div>
+

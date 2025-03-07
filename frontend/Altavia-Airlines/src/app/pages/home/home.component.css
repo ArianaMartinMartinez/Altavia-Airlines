@@ -15,13 +15,6 @@
     background-repeat: no-repeat;
 }
 
-.btn-danger {
-    background-color: var(--red) !important;
-    color: var(--white) !important;
-    margin-top: 10px;
-    transition: transform 0.5s ease;
-}
-
 .btn-danger:hover {
     background-color: var(--darkRed) !important;
     transform: scale(1.2);
