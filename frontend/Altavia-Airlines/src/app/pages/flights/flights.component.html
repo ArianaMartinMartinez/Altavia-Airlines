@@ -1,12 +1,20 @@
-<app-flights-filter></app-flights-filter>
+<app-flights-filter (filteredFlightsEvent)="filterFlights($event)"></app-flights-filter>
 
 <a [routerLink]="">
     <button type="button" class="btn btn-primary">Old flights</button>
 </a>
 
 <div class="container">
-    <app-flight-card
-        *ngFor="let flight of flightsList"
-        [flight]="flight"
-    ></app-flight-card>
+    <ng-container *ngIf="flightsList.length > 0; else noFlights">
+        <app-flight-card
+            *ngFor="let flight of flightsList"
+            [flight]="flight">
+        </app-flight-card>
+    </ng-container>
+    
+    <ng-template #noFlights>
+        <h3>
+            No flights found with the selected filters.
+        </h3>
+    </ng-template>
 </div>

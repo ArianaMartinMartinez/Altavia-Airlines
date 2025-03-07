@@ -20,10 +20,11 @@ export class FlightsComponent {
     this.getFlights();
   }
 
-  private getFlights() {
+  getFlights() {
     this.flightService.getAllFutureFlights().subscribe({
       next: (rtn) => {
         this.flightsList = rtn;
+        console.log(this.flightsList);
       },
       error: (error) => {
         console.log(error);
@@ -32,5 +33,10 @@ export class FlightsComponent {
         this.hasLoaded = true;
       }
     });
+  }
+
+  filterFlights(filteredFlights: Flight[]) {
+    this.flightsList = filteredFlights;
+    console.log(this.flightsList);
   }
 }

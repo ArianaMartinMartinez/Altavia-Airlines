@@ -1,7 +1,7 @@
 <div class="flightDiv">
     <div>
         <p>{{ flight.airplane.name }}</p>
-        <p>{{ flight.users_count-flight.airplane.seats }}/{{ flight.airplane.seats }} available seats</p>
+        <p>{{ flight.airplane.seats-flight.users_count }}/{{ flight.airplane.seats }} available seats</p>
     </div>
 
     <div>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CityService } from '../../services/city.service';
 import { FlightService } from '../../services/flight.service';
@@ -13,6 +13,7 @@ import { Flight } from '../../models/flight';
   styleUrl: './flights-filter.component.css'
 })
 export class FlightsFilterComponent {
+  @Output() filteredFlightsEvent = new EventEmitter<Flight[]>();
   filterForm: FormGroup;
   citiesList: City[] = [];
   filteredFlights: Flight[] = [];
@@ -77,6 +78,7 @@ export class FlightsFilterComponent {
       this.flightService.getFutureFilteredFlights(filters).subscribe({
         next: (rtn) => {
           this.filteredFlights = rtn;
+          this.filteredFlightsEvent.emit(this.filteredFlights);
         },
         error: (error) => {
           console.log(error);

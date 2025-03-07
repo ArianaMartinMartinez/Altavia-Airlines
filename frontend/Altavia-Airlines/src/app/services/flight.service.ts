@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Flight } from '../models/flight';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment/environment';
-import { filter, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,6 @@ export class FlightService {
   }
 
   getFutureFilteredFlights(filters: any): Observable<any> {
-    return this.http.get(`${this.url}/filterFutureFlights`, filters);
+    return this.http.get(`${this.url}/filterFutureFlights`, {params: filters});
   }
 }
