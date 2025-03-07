@@ -1,3 +1,13 @@
-<div>
-    
+<div class="flightDiv">
+    <div>
+        <p>{{ flight.airplane.name }}</p>
+        <p>{{ flight.users_count-flight.airplane.seats }}/{{ flight.airplane.seats }} available seats</p>
+    </div>
+
+    <div>
+        <p>{{ flight.date }}</p>
+        <p>{{ flight.departure.name }} - {{ flight.arrival.name }}</p>
+    </div>
+
+    <button class="btn btn-light">Book flight</button>
 </div>

@@ -1,0 +1,28 @@
+.flightDiv {
+    background-color: var(--darkBlue);
+    color: var(--white);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: larger;
+    transition: all 0.8s ease;
+    transition-property: transform, box-shadow;
+}
+
+.flightDiv:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 5px 0px rgba(80,185,206,1);
+}
+
+.btn-light {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.btn-light:hover {
+    background-color: #c7d5d6;
+}

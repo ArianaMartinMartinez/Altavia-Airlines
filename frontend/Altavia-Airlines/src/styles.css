@@ -13,7 +13,7 @@ html, body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: var(--white);
+    background-color: var(--lightBlue);
 }
 
 a {
@@ -29,5 +29,4 @@ li {
     background-color: var(--red) !important;
     color: var(--white) !important;
     margin-top: 10px;
-    transition: transform 0.5s ease;
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Flight } from '../../models/flight';
 
 @Component({
   selector: 'app-flight-card',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './flight-card.component.css'
 })
 export class FlightCardComponent {
-
+  @Input() flight!: Flight;
 }
