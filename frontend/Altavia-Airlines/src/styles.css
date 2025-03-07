@@ -9,11 +9,15 @@
     --green: #49BF8F;
 }
 
-html, body {
+html, body, app-root {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: var(--lightBlue);
+}
+
+main {
+    flex: 1;
 }
 
 a {
@@ -29,4 +33,8 @@ li {
     background-color: var(--red) !important;
     color: var(--white) !important;
     margin-top: 10px;
+}
+
+footer{
+    margin-top: auto;
 }
