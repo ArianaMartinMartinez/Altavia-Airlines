@@ -13,6 +13,3 @@
 .btn-danger {
     margin: 0;
 }
-.btn-danger:hover {
-    background-color: var(--darkRed) !important;
-}

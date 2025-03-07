@@ -20,7 +20,6 @@
 }
 
 .btn-danger:hover {
-    background-color: var(--darkRed) !important;
     transform: scale(1.2);
 }
 

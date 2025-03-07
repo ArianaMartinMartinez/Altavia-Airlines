@@ -29,12 +29,37 @@ li {
     list-style: none;
 }
 
+footer{
+    margin-top: auto;
+}
+
 .btn-danger {
-    background-color: var(--red) !important;
-    color: var(--white) !important;
+    background-color: var(--red);
+    color: var(--white);
+    border-color: var(--red);
     margin-top: 10px;
 }
 
-footer{
-    margin-top: auto;
+.btn-danger:hover {
+    background-color: var(--darkRed) !important;
+}
+
+.btn-light {
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+}
+
+.btn-light:hover {
+    background-color: #c7d5d6;
+}
+
+.btn-primary {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--darkBlue);
 }
