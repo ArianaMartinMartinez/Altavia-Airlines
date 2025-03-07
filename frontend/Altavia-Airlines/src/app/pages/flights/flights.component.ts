@@ -5,10 +5,11 @@ import { FlightCardComponent } from '../../shared/flight-card/flight-card.compon
 import { Flight } from '../../models/flight';
 import { FlightService } from '../../services/flight.service';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-flights',
-  imports: [FlightsFilterComponent, RouterLink, FlightCardComponent, CommonModule],
+  imports: [FlightsFilterComponent, RouterLink, FlightCardComponent, CommonModule, LoaderComponent],
   templateUrl: './flights.component.html',
   styleUrl: './flights.component.css'
 })

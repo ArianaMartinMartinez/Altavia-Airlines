@@ -41,7 +41,8 @@ footer{
 }
 
 .btn-danger:hover {
-    background-color: var(--darkRed) !important;
+    background-color: var(--darkRed);
+    border-color: var(--darkRed);
 }
 
 .btn-light {
@@ -52,6 +53,7 @@ footer{
 
 .btn-light:hover {
     background-color: #c7d5d6;
+    border-color: #c7d5d6;
 }
 
 .btn-primary {
@@ -62,4 +64,5 @@ footer{
 
 .btn-primary:hover {
     background-color: var(--darkBlue);
+    border-color: var(--darkBlue);
 }
