@@ -1,12 +1,18 @@
 <div class="flightDiv">
     <div>
-        <p>{{ flight.airplane.name }}</p>
+        <h4>{{ flight.airplane.name }}</h4>
         <p>{{ flight.airplane.seats-flight.users_count }}/{{ flight.airplane.seats }} available seats</p>
     </div>
 
+    <div class="flightRoute">
+        <p>{{ flight.departure.name }}</p>
+        <img src="routePlane.png" alt="Flying plane" width="250px">
+        <p>{{ flight.arrival.name }}</p>
+    </div>
+    
     <div>
         <p>{{ flight.date }}</p>
-        <p>{{ flight.departure.name }} - {{ flight.arrival.name }}</p>
+        <p>{{ flight.price }}€</p>
     </div>
 
     <button class="btn btn-light">Book flight</button>
