@@ -14,7 +14,7 @@
             <input type="date" id="date" formControlName="date" class="form-control">
             <div *ngIf="filterForm.get('date')?.invalid && filterForm.get('date')?.touched"
                 class="text-danger">
-                Date must be today or greater
+                {{ page === 'flights' ? 'Date must be today or later' : 'Date must be before today' }}
             </div>
         </div>
         <button type="submit" class="btn btn-danger">Search</button>

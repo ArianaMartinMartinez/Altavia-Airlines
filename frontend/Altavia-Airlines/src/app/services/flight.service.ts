@@ -16,7 +16,15 @@ export class FlightService {
     return this.http.get<Flight[]>(`${this.url}/flightsFuture`);
   }
 
+  getAllPastFlights(): Observable<Flight[]> {
+    return this.http.get<Flight[]>(`${this.url}/flightsPast`);
+  }
+
   getFutureFilteredFlights(filters: any): Observable<any> {
     return this.http.get(`${this.url}/filterFutureFlights`, {params: filters});
+  }
+
+  getPastFilteredFlights(filters: any): Observable<any> {
+    return this.http.get(`${this.url}/filterPastFlights`, {params: filters});
   }
 }
