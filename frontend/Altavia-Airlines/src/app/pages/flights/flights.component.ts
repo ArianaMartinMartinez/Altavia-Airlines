@@ -25,7 +25,6 @@ export class FlightsComponent {
     this.flightService.getAllFutureFlights().subscribe({
       next: (rtn) => {
         this.flightsList = rtn;
-        console.log(this.flightsList);
       },
       error: (error) => {
         console.log(error);
@@ -38,6 +37,5 @@ export class FlightsComponent {
 
   filterFlights(filteredFlights: Flight[]) {
     this.flightsList = filteredFlights;
-    console.log(this.flightsList);
   }
 }

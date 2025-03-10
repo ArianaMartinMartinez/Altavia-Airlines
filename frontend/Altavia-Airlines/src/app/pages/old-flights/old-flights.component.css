@@ -2,6 +2,10 @@ h3 {
     text-align: center;
 }
 
+h2 {
+    color: var(--black);
+}
+
 app-flights-filter {
     width: 80%;
 }
@@ -11,6 +15,7 @@ app-flights-filter {
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    width: 100%;
 }
 
 .filterAndButton a {
