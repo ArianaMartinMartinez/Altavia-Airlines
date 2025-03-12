@@ -1,0 +1,36 @@
+a {
+    color: var(--black);
+}
+
+a:hover {
+    color: var(--darkBlue);
+}
+
+h2 {
+    text-align: center;
+}
+
+.container {
+    width: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: larger;
+}
+
+form > div {
+    width: 100%;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}

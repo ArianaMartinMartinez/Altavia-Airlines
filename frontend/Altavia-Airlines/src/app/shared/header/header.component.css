@@ -9,7 +9,7 @@ header {
     box-shadow: 0px 10px 5px 0px rgba(37,123,149,1);
 }
 
-.title > a, header > nav > ul {
+.title > a, header > nav > ul, .authHeader {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -25,5 +25,13 @@ header > nav > ul {
 }
 
 header a:hover {
+    color: var(--darkBlue);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-pointer:hover {
     color: var(--darkBlue);
 }

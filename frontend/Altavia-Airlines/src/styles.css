@@ -7,6 +7,7 @@
     --blue: #50B9CE;
     --darkBlue: #257B95;
     --green: #49BF8F;
+    --darkGreen: #41af83;
 }
 
 html, body, app-root {
@@ -65,4 +66,18 @@ footer{
 .btn-primary:hover {
     background-color: var(--darkBlue);
     border-color: var(--darkBlue);
+}
+
+.btn-submit {
+    background-color: var(--green);
+    color: var(--white);   
+}
+
+.btn-submit:hover {
+    background-color: var(--darkGreen);
+}
+
+.btn-secondary {
+    background-color: var(--black);
+    color: var(--white);
 }

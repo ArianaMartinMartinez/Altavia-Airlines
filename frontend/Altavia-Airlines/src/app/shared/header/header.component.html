@@ -10,8 +10,14 @@
     <nav>
         <ul>
             <li><a [routerLink]="['/flights']">Flights</a></li>
-            <li><a href="">Log in</a></li>
-            <li><a href="">Register</a></li>
+            <div class="authHeader" *ngIf="!loggedIn">
+                <li><a [routerLink]="['/login']">Log in</a></li>
+                <li><a href="">Register</a></li>
+            </div>
+            <div class="authHeader" *ngIf="loggedIn">
+                <li><a href="">My bookings</a></li>
+                <li (click)="logout()" class="cursor-pointer">Log out</li>
+            </div>
         </ul>
     </nav>
 </header>
