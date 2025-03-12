@@ -16,12 +16,16 @@ export class AuthService {
   
   constructor(private http: HttpClient) { }
 
-  login(form: any): Observable<any> {
+  login(form: Object): Observable<any> {
     return this.http.post(`${this.url}/auth/login`, form);
   }
 
   logout(token: Object): Observable<any> {
     return this.http.post(`${this.url}/auth/logout`, token);
+  }
+
+  register(form: Object): Observable<any> {
+    return this.http.post(`${this.url}/auth/register`, form);
   }
 
   changeAuthStatus(value: boolean) {

@@ -12,7 +12,7 @@
             <li><a [routerLink]="['/flights']">Flights</a></li>
             <div class="authHeader" *ngIf="!loggedIn">
                 <li><a [routerLink]="['/login']">Log in</a></li>
-                <li><a href="">Register</a></li>
+                <li><a [routerLink]="['/register']">Register</a></li>
             </div>
             <div class="authHeader" *ngIf="loggedIn">
                 <li><a href="">My bookings</a></li>
