@@ -3,7 +3,6 @@
     <form [formGroup]="registerForm" (submit)="submit()">
 
         <div class="alert alert-danger" [hidden]="!error">{{error}}</div>
-        <div class="alert alert-success" [hidden]="!success">{{success}}</div>
 
         <div class="mb-3">
             <label for="name" class="form-label">Name:</label>

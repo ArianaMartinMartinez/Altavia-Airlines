@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,6 @@ export class RegisterComponent {
   registerForm: FormGroup;
 
   error = null;
-  success: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -36,10 +36,17 @@ export class RegisterComponent {
 
     this.authService.register(this.registerForm.value).subscribe({
       next: (rtn) => {
-        this.success = 'You have successfully registered. Redirecting to log in...';
+        Swal.fire({
+          icon: 'success',
+          title: 'Register successful',
+          text: 'Redirecting to log in...',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
         setTimeout(() => {
           this.router.navigateByUrl('/login');
-        }, 2000);
+        }, 2500);
       },
       error: (error) => {
         console.error(error);
