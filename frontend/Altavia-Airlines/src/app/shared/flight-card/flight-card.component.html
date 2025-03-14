@@ -15,5 +15,8 @@
         <p>{{ flight.price }}€</p>
     </div>
 
-    <button class="btn btn-light">Book flight</button>
+    <div (click)="booked(flight.id)" style="cursor: pointer;">
+        <button *ngIf="!isBooked" [disabled]="disabled" class="btn btn-light">Book flight</button>
+        <button *ngIf="isBooked" [disabled]="disabled" class="btn btn-danger">Cancel</button>
+    </div>
 </div>

@@ -18,8 +18,10 @@
                 <ng-container *ngIf="flightsList.length > 0; else noFlights">
                     <app-flight-card
                         *ngFor="let flight of flightsList"
-                        [flight]="flight">
-                    </app-flight-card>
+                        [flight]="flight"
+                        [isBooked]="bookedFlightsList.includes((flight.id).toString())"
+                        (flightBooked)="setBooking($event)"
+                    ></app-flight-card>
                 </ng-container>
                 
                 <ng-template #noFlights>
