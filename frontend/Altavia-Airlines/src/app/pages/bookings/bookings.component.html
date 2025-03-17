@@ -1,0 +1,35 @@
+<div>
+    <div class="d-flex justify-content-center align-items-center">
+        <app-loader *ngIf="!hasLoaded; else bookingsPage"></app-loader>
+    </div>
+
+    <ng-template #bookingsPage>
+        <div class="d-flex flex-column align-items-center container">
+            <h2 class="mt-5">Next flight</h2>
+            <div class="mt-2 container">
+                <ng-container *ngIf="nextBooking; else noNextBooking">
+                    <app-flight-card
+                        [flight]="nextBooking"
+                        [isBooked]="true"
+                        (flightBooked)="setBooking($event)"
+                    ></app-flight-card>
+                </ng-container>
+                <ng-template #noNextBooking>
+                    <h3 class="mt-5 text-center">
+                        No flights booked.
+                    </h3>
+                </ng-template>
+            </div>
+
+            <div class="bookingTitles">
+                <h2 class="mt-5" (click)="loadFutureBookings()" class="{{ futureFlightsLoaded ? 'selected' : 'noSelected' }}">Future flights</h2>
+                <h2 class="mt-5" (click)="loadOldBookings()" class="{{ !futureFlightsLoaded ? 'selected' : 'noSelected' }}">Old flights</h2>
+            </div>
+
+            <div class="mt-2 container">
+                <app-future-bookings *ngIf="futureFlightsLoaded" [futureBookings]="futureBookings"></app-future-bookings>
+                <app-old-bookings *ngIf="!futureFlightsLoaded" [oldBookings]="oldBookings"></app-old-bookings>
+            </div>
+        </div>
+    </ng-template>
+</div>

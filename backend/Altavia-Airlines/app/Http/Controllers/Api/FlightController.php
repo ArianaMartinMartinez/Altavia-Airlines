@@ -124,7 +124,7 @@ class FlightController extends Controller
     public function indexBookings() {
         $user = JWTAuth::user();
 
-        $bookings = $user->flights()->with('airplane', 'departure', 'arrival')->orderBy('date', 'asc')->get();
+        $bookings = $user->flights()->with('airplane', 'departure', 'arrival')->withCount('users')->orderBy('date', 'asc')->get();
 
         $bookings->transform(function ($flight) {
             $flight->date = Carbon::parse($flight->date)->toDateString();

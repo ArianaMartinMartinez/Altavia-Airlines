@@ -18,7 +18,8 @@
                 <ng-container *ngIf="flightsList.length > 0; else noFlights">
                     <app-flight-card
                         *ngFor="let flight of flightsList"
-                        [flight]="flight">
+                        [flight]="flight"
+                        [disabled]="true">
                     </app-flight-card>
                 </ng-container>
                 

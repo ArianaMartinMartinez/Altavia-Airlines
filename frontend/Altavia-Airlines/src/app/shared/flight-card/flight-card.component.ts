@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Flight } from '../../models/flight';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,19 +16,11 @@ export class FlightCardComponent implements OnInit {
   @Output() flightBooked: EventEmitter<string> = new EventEmitter<string>();
 
   loggedIn: boolean = false;
-  page: string = '';
-  disabled: boolean = false;
+  @Input() disabled: boolean = false;
 
-  constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute,
-  ) {
-    this.page = this.route.snapshot.url[0].path;
-  }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.disabled = this.page === 'oldFlights' ? true : false;
-    
     this.authService.authStatus.subscribe({
       next: (rtn) => {
         this.loggedIn = rtn;

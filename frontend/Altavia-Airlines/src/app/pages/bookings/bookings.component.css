@@ -1,0 +1,16 @@
+.bookingTitles {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.bookingTitles > h2 {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: 0.5rem;
+    border-radius: 10px;
+}

@@ -1,0 +1,13 @@
+<ng-container *ngIf="futureBookings.length > 0; else noFutureBookings">
+    <app-flight-card
+        *ngFor="let booking of futureBookings"
+        [flight]="booking"
+        [isBooked]="true"
+        (flightBooked)="setBooking($event)"
+    ></app-flight-card>
+</ng-container>
+<ng-template #noFutureBookings>
+    <h3 class="mt-5 text-center">
+        No future flights booked.
+    </h3>
+</ng-template>

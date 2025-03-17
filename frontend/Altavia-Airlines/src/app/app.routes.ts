@@ -4,6 +4,7 @@ import { FlightsComponent } from './pages/flights/flights.component';
 import { OldFlightsComponent } from './pages/old-flights/old-flights.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { BookingsComponent } from './pages/bookings/bookings.component';
 
 export const routes: Routes = [
     {
@@ -26,4 +27,8 @@ export const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
     },
+    {
+        path: 'my-bookings',
+        component: BookingsComponent,
+    }
 ];

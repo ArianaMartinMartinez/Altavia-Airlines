@@ -1,0 +1,14 @@
+<ng-container *ngIf="oldBookings.length > 0; else noOldBookings">
+    <app-flight-card
+    *ngFor="let booking of oldBookings"
+        [flight]="booking"
+        [isBooked]="true"
+        [disabled]="true"
+        (flightBooked)="setBooking($event)"
+    ></app-flight-card>
+</ng-container>
+<ng-template #noOldBookings>
+    <h3 class="mt-5 text-center">
+        No old flights booked.
+    </h3>
+</ng-template>
