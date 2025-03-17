@@ -5,10 +5,11 @@ import { OldFlightsComponent } from './pages/old-flights/old-flights.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         component: HomeComponent,
     },
     {
@@ -30,5 +31,16 @@ export const routes: Routes = [
     {
         path: 'my-bookings',
         component: BookingsComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+    },
+    {
+        path: '**',
+        redirectTo: 'home',
+        pathMatch: 'full',
     }
 ];
