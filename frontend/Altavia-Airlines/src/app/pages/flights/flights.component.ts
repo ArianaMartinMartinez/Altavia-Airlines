@@ -105,7 +105,6 @@ export class FlightsComponent implements OnInit {
   
       this.bookedFlightsList.push(id);
       this.bookFlight(Number(id));
-
     }
 
     if(!this.loggedIn) {
@@ -127,6 +126,10 @@ export class FlightsComponent implements OnInit {
           icon: "success",
           title: rtn.message,
         });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       },
       error: (error) => {
         if(error.error.message) {
@@ -151,6 +154,10 @@ export class FlightsComponent implements OnInit {
           icon: "success",
           title: rtn.message,
         });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       },
       error: (error) => {
         if(error.error.message) {
