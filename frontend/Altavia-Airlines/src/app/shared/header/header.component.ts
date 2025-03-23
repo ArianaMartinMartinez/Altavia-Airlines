@@ -12,6 +12,7 @@ import { TokenService } from '../../services/token.service';
 })
 export class HeaderComponent implements OnInit {
   loggedIn: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -23,9 +24,19 @@ export class HeaderComponent implements OnInit {
     this.authService.authStatus.subscribe({
       next: (rtn) => {
         this.loggedIn = rtn;
+
+        if(this.loggedIn) {
+          this.checkIsAdmin();
+        }
       },
       error: (error) => {
         console.error(error);
+      }
+    });
+
+    this.authService.roleStatus.subscribe({
+      next: (rtn) => {
+        this.isAdmin = rtn === 'admin';
       }
     })
   }
@@ -45,5 +56,9 @@ export class HeaderComponent implements OnInit {
         console.error(error);
       },
     });
+  }
+
+  checkIsAdmin() {
+    this.isAdmin = (this.authService.getRole() === 'admin') ? true : false;
   }
 }

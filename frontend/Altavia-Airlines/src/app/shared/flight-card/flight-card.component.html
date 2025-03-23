@@ -15,8 +15,14 @@
         <p>{{ flight.price }}€</p>
     </div>
 
-    <div (click)="booked(flight.id)" style="cursor: pointer;">
+    <div (click)="booked(flight.id)" style="cursor: pointer;" *ngIf="!isAdmin">
         <button *ngIf="!isBooked" [disabled]="disabled" class="btn btn-light">Book flight</button>
         <button *ngIf="isBooked" [disabled]="disabled" class="btn btn-danger">Cancel</button>
+    </div>
+
+    <div style="cursor: pointer;" class="adminTools" *ngIf="isAdmin">
+        <i class="fa-solid fa-circle-info"></i>
+        <i class="fa-solid fa-pen-to-square"></i>
+        <i class="fa-solid fa-trash"></i>
     </div>
 </div>

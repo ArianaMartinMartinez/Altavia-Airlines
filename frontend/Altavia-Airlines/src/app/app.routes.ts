@@ -20,6 +20,12 @@ export const routes: Routes = [
         path: 'oldFlights',
         component: OldFlightsComponent,
     },
+    /*{
+        path: 'flight-details',
+        component: ,
+        canActivate: [AuthGuard],
+        data: { role: 'admin' },
+    },*/
     {
         path: 'login',
         component: LoginComponent,

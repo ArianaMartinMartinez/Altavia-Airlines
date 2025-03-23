@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   loggedIn: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
-    authService.authStatus.subscribe({
+    this.authService.authStatus.subscribe({
       next: (rtn) => {
         this.loggedIn = rtn;
       },
@@ -20,16 +20,16 @@ export class AuthGuard implements CanActivate {
     });
   }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    
-    
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    const requiredRole = next.data['role'];
     if (this.loggedIn) {
+      if(requiredRole && this.authService.getRole()!==requiredRole){
+        return false;
+      }
       return true;
-    } else {
-      this.router.navigate(['login']);
-      return false;
     }
+
+    this.router.navigate(['login']);
+    return false;
   }
 }

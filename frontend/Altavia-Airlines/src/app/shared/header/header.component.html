@@ -15,7 +15,8 @@
                 <li><a [routerLink]="['/register']">Register</a></li>
             </div>
             <div class="authHeader" *ngIf="loggedIn">
-                <li><a [routerLink]="['/my-bookings']">My bookings</a></li>
+                <li *ngIf="!isAdmin"><a [routerLink]="['/my-bookings']">My bookings</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/airplanes-admin']">Airplanes</a></li>
                 <li (click)="logout()" class="cursor-pointer">Log out</li>
             </div>
         </ul>

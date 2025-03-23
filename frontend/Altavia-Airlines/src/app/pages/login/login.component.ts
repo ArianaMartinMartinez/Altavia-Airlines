@@ -39,7 +39,16 @@ export class LoginComponent {
 
         if(validToken) {
           this.authService.changeAuthStatus(true);
-          this.router.navigateByUrl('/');
+
+          this.authService.me({token: rtn.access_token}).subscribe({
+            next: (rtn) => {
+              this.authService.setRole(rtn.role);
+              this.router.navigateByUrl('/');
+            },
+            error: (error) => {
+              console.error(error);
+            }
+          });
         }
       },
       error: (error) => {

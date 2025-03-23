@@ -26,3 +26,19 @@
     gap: 10px;
     flex-wrap: wrap;
 }
+
+.adminTools {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.adminTools > i {
+    transition: transform 0.8s ease;
+}
+
+.adminTools > i:hover {
+    transform: scale(1.05);
+}
