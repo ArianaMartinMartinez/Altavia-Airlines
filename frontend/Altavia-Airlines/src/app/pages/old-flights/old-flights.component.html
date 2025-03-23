@@ -19,6 +19,8 @@
                     <app-flight-card
                         *ngFor="let flight of flightsList"
                         [flight]="flight"
+                        [isAdmin]="isAdmin"
+                        [isBooked]="bookedFlightsList.includes((flight.id).toString())"
                         [disabled]="true">
                     </app-flight-card>
                 </ng-container>

@@ -22,6 +22,7 @@ export class FlightsComponent implements OnInit {
   hasLoaded: boolean = false;
   bookedFlightsList: string[] = [];
   loggedIn: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private flightService: FlightService,
@@ -36,13 +37,17 @@ export class FlightsComponent implements OnInit {
     this.authService.authStatus.subscribe({
       next: (rtn) => {
         this.loggedIn = rtn;
+        if(this.loggedIn) {
+          this.getUserRole();
+          if(!this.isAdmin) {
+            this.getBookings();
+          }
+        }
       },
       error: (error) => {
         console.error(error);
       }
     });
-
-    if(this.loggedIn) { this.getBookings(); }
   }
 
   getFlights() {
@@ -53,14 +58,29 @@ export class FlightsComponent implements OnInit {
       error: (error) => {
         console.log(error);
       },
-      complete: () => {
-        this.hasLoaded = true;
-      }
     });
   }
 
   filterFlights(filteredFlights: Flight[]) {
     this.flightsList = filteredFlights;
+  }
+
+  getUserRole() {
+    const token = {
+      token: this.tokenService.get(),
+    }
+
+    this.authService.me(token).subscribe({
+      next: (rtn) => {
+        this.isAdmin = rtn.role === 'admin';
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.hasLoaded = true;
+      }
+    });
   }
 
   getBookings() {

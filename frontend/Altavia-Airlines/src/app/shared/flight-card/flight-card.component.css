@@ -42,3 +42,7 @@
 .adminTools > i:hover {
     transform: scale(1.05);
 }
+
+i {
+    font-size: larger;
+}

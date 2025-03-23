@@ -24,21 +24,12 @@ export class HeaderComponent implements OnInit {
     this.authService.authStatus.subscribe({
       next: (rtn) => {
         this.loggedIn = rtn;
-
-        if(this.loggedIn) {
-          this.checkIsAdmin();
-        }
+        if(this.loggedIn) { this.getUserRole(); }
       },
       error: (error) => {
         console.error(error);
       }
     });
-
-    this.authService.roleStatus.subscribe({
-      next: (rtn) => {
-        this.isAdmin = rtn === 'admin';
-      }
-    })
   }
 
   logout() {
@@ -50,6 +41,7 @@ export class HeaderComponent implements OnInit {
       next: (rtn) => {
         this.tokenService.remove();
         this.authService.changeAuthStatus(false);
+        this.isAdmin = false;
         this.router.navigateByUrl('/');
       },
       error: (error) => {
@@ -58,7 +50,18 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  checkIsAdmin() {
-    this.isAdmin = (this.authService.getRole() === 'admin') ? true : false;
+  getUserRole() {
+    const token = {
+      token: this.tokenService.get(),
+    }
+
+    this.authService.me(token).subscribe({
+      next: (rtn) => {
+        this.isAdmin = rtn.role === 'admin';
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 }

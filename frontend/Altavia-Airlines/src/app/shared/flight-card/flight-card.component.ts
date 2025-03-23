@@ -13,11 +13,11 @@ export class FlightCardComponent implements OnInit {
   @Input() flight!: Flight;
   @Input() isBooked?: boolean;
   @Input() disabled: boolean = false;
+  @Input() isAdmin: boolean = false;
 
   @Output() flightBooked: EventEmitter<string> = new EventEmitter<string>();
 
   loggedIn: boolean = false;
-  isAdmin: boolean = false;
 
   constructor(private authService: AuthService) { }
 
@@ -30,17 +30,9 @@ export class FlightCardComponent implements OnInit {
         console.error(error);
       }
     });
-
-    if(this.loggedIn) {
-      this.checkIsAdmin();
-    }
   }
 
   booked(id: number) {
     this.flightBooked.emit(id.toString());
-  }
-
-  checkIsAdmin() {
-    this.isAdmin = (this.authService.getRole() === 'admin') ? true : false;
   }
 }

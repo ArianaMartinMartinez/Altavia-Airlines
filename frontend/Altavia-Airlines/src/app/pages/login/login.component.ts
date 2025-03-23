@@ -4,15 +4,17 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { Router, RouterLink } from '@angular/router';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, LoaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  hasLoaded: boolean = true;
 
   error = null;
 
@@ -33,6 +35,8 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
+
+    this.hasLoaded = false;
     this.authService.login(this.loginForm.value).subscribe({
       next: (rtn) => {
         const validToken = this.tokenService.handle(rtn.access_token);
@@ -42,17 +46,17 @@ export class LoginComponent {
 
           this.authService.me({token: rtn.access_token}).subscribe({
             next: (rtn) => {
-              this.authService.setRole(rtn.role);
               this.router.navigateByUrl('/');
             },
             error: (error) => {
               console.error(error);
-            }
+            },
           });
         }
       },
       error: (error) => {
         console.error(error);
+        this.hasLoaded = true;
         this.handleError(error);
       },
     });

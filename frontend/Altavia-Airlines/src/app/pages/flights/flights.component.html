@@ -10,6 +10,9 @@
                 <a [routerLink]="['/oldFlights']">
                     <button type="button" class="btn btn-primary">Old flights</button>
                 </a>
+                <a [routerLink]="['']" *ngIf="isAdmin">
+                    <button type="button" class="btn btn-submit">New flight</button>
+                </a>
             </div>
 
             <h2 class="mt-5">Flights</h2>
@@ -19,6 +22,7 @@
                     <app-flight-card
                         *ngFor="let flight of flightsList"
                         [flight]="flight"
+                        [isAdmin]="isAdmin"
                         [isBooked]="bookedFlightsList.includes((flight.id).toString())"
                         (flightBooked)="setBooking($event)"
                     ></app-flight-card>
