@@ -57,6 +57,9 @@ export class OldFlightsComponent implements OnInit {
       error: (error) => {
         console.log(error);
       },
+      complete: () => {
+        this.hasLoaded = true;
+      }
     });
   }
 

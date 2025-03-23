@@ -58,6 +58,9 @@ export class FlightsComponent implements OnInit {
       error: (error) => {
         console.log(error);
       },
+      complete: () => {
+        this.hasLoaded = true;
+      }
     });
   }
 
@@ -107,6 +110,9 @@ export class FlightsComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
+      },
+      complete: () => {
+        this.hasLoaded = true;
       }
     });
   }
