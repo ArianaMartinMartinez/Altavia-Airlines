@@ -1,48 +1,40 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { TokenService } from './services/token.service';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  loggedIn: boolean = false;
 
-  constructor(private authService: AuthService, private tokenService: TokenService, private router: Router) {
-    this.authService.authStatus.subscribe({
-      next: (rtn) => {
-        this.loggedIn = rtn;
-      },
-      error: (error) => {
-        console.error(error);
-      }
-    });
-  }
+  constructor(private authService: AuthService, private tokenService: TokenService, private router: Router) {}
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const requiredRole = next.data['role'];
-    if (this.loggedIn) {
-      const token = {
-        token: this.tokenService.get(),
-      }
-      let role: string = 'user';
-      this.authService.me(token).subscribe({
-        next: (rtn) => {
-          role = rtn.role;
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
-      if(requiredRole && role!==requiredRole){
-        return false;
-      }
-      return true;
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    if (!this.tokenService.loggedIn()) {
+      this.router.navigate(['login']);
+      return of(false);
     }
 
-    this.router.navigate(['login']);
-    return false;
+    const requiredRole = next.data['role'];
+    const token = { token: this.tokenService.get() };
+
+    return this.authService.me(token).pipe(
+      map((user) => {
+        if (requiredRole && user.role !== requiredRole) {
+          this.router.navigate(['login']);
+          return false;
+        }
+
+        return true;
+      }),
+      catchError((error) => {
+        console.error(error);
+        this.router.navigate(['login']);
+        return of(false);
+      })
+    );
   }
 }
