@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FlightsFilterComponent } from "../../shared/flights-filter/flights-filter.component";
+import { FlightsFilterComponent } from "../../../shared/flights-filter/flights-filter.component";
 import { RouterLink } from '@angular/router';
-import { FlightCardComponent } from '../../shared/flight-card/flight-card.component';
-import { Flight } from '../../models/flight';
-import { FlightService } from '../../services/flight.service';
+import { FlightCardComponent } from '../../../shared/flight-card/flight-card.component';
+import { Flight } from '../../../models/flight';
+import { FlightService } from '../../../services/flight.service';
 import { CommonModule } from '@angular/common';
-import { LoaderComponent } from '../../shared/loader/loader.component';
-import { AuthService } from '../../services/auth.service';
-import { TokenService } from '../../services/token.service';
-import { BookingService } from '../../services/booking.service';
+import { LoaderComponent } from '../../../shared/loader/loader.component';
+import { AuthService } from '../../../services/auth.service';
+import { TokenService } from '../../../services/token.service';
+import { BookingService } from '../../../services/booking.service';
 import Swal from 'sweetalert2';
 
 @Component({
