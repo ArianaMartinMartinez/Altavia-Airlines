@@ -1,0 +1,44 @@
+<div>
+    <div class="d-flex justify-content-center align-items-center">
+        <app-loader *ngIf="!hasLoaded; else flightsDetailPage"></app-loader>
+    </div>
+
+    <ng-template #flightsDetailPage>
+        <div class="d-flex flex-column align-items-center container">
+            <h2 class="mt-5">{{ flight.airplane.name }}</h2>
+
+            <div style="width: 100%;" class="data">
+                <div class="m-2 d-flex align-items-center justify-content-around">
+                    <p>{{ flight.departure.name }} - {{ flight.arrival.name }}</p>
+                    <p><strong>Available seats:</strong> {{ flight.airplane.seats-flight.users_count }}/{{ flight.airplane.seats }}</p>
+                </div>
+                <div class="m-2 d-flex align-items-center justify-content-around">
+                    <p>{{ flight.date }}</p>
+                    <p>{{ flight.price }}€</p>
+                </div>
+            </div>
+
+            <div style="width: 80%;">
+                <h3 class="m-3">Booked by:</h3>
+
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of flight.users">
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr *ngIf="flight.users.length === 0">
+                            <td colspan="2" class="text-center">Flight booked by no one</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </ng-template>
+</div>

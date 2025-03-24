@@ -27,4 +27,8 @@ export class FlightService {
   getPastFilteredFlights(filters: any): Observable<any> {
     return this.http.get(`${this.url}/filterPastFlights`, {params: filters});
   }
+
+  getFlightById(id: string, token: any) {
+    return this.http.get(`${this.url}/flights/${id}`, {params: token});
+  }
 }

@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { AuthGuard } from './auth.guard';
+import { FlightDetailComponent } from './pages/flights/admin/flight-detail/flight-detail.component';
 
 export const routes: Routes = [
     {
@@ -20,12 +21,12 @@ export const routes: Routes = [
         path: 'oldFlights',
         component: OldFlightsComponent,
     },
-    /*{
-        path: 'flight-details',
-        component: ,
+    {
+        path: 'flight-detail/:id',
+        component: FlightDetailComponent,
         canActivate: [AuthGuard],
         data: { role: 'admin' },
-    },*/
+    },
     {
         path: 'login',
         component: LoginComponent,

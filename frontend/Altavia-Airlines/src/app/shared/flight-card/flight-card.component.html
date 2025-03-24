@@ -20,8 +20,10 @@
         <button *ngIf="isBooked" [disabled]="disabled" class="btn btn-danger">Cancel</button>
     </div>
 
-    <div style="cursor: pointer;" class="adminTools" *ngIf="isAdmin">
-        <i class="fa-solid fa-circle-info"></i>
+    <div class="adminTools" *ngIf="isAdmin">
+        <a [routerLink]="['/flight-detail', flight.id]">
+            <i class="fa-solid fa-circle-info"></i>
+        </a>
         <i class="fa-solid fa-pen-to-square"></i>
         <i class="fa-solid fa-trash"></i>
     </div>

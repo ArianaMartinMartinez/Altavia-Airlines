@@ -1,0 +1,12 @@
+.table {
+    --bs-table-bg: var(--white) !important;
+}
+
+.table-light {
+    --bs-table-bg: var(--darkBlue) !important;
+    --bs-table-color: var(--white) !important;
+}
+
+.data {
+    font-size: x-large;
+}

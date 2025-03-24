@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Flight } from '../../models/flight';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-flight-card',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './flight-card.component.html',
   styleUrl: './flight-card.component.css'
 })
