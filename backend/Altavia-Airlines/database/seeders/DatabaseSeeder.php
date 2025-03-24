@@ -23,6 +23,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@example.com',
+            'password' => 'user',
+            'role' => 'user',
+        ]);
+
         City::factory(100)->create();
 
         Airplane::factory(15)->create();

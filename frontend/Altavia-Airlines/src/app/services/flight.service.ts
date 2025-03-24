@@ -28,7 +28,11 @@ export class FlightService {
     return this.http.get(`${this.url}/filterPastFlights`, {params: filters});
   }
 
-  getFlightById(id: string, token: any) {
+  getFlightById(id: string, token: any): Observable<any> {
     return this.http.get(`${this.url}/flights/${id}`, {params: token});
+  }
+
+  deleteFlight(id: string, token: any): Observable<any> {
+    return this.http.delete(`${this.url}/flights/${id}`, {params: token});
   }
 }

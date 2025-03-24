@@ -197,4 +197,25 @@ export class FlightsComponent implements OnInit {
       }
     });
   }
+
+  deleteFlight(id: string) {
+    const token = {
+      token: this.tokenService.get(),
+    }
+    this.flightService.deleteFlight(id, token).subscribe({
+      next: (rtn) => {
+        Swal.fire({
+          icon: "success",
+          text: rtn.message,
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 }

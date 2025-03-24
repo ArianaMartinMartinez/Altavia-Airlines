@@ -9,6 +9,7 @@ import { LoaderComponent } from '../../shared/loader/loader.component';
 import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { BookingService } from '../../services/booking.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-old-flights',
@@ -106,6 +107,27 @@ export class OldFlightsComponent implements OnInit {
             this.bookedFlightsList.push((flight.id).toString());
           });
         }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  deleteFlight(id: string) {
+    const token = {
+      token: this.tokenService.get(),
+    }
+    this.flightService.deleteFlight(id, token).subscribe({
+      next: (rtn) => {
+        Swal.fire({
+          icon: "success",
+          text: rtn.message,
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       },
       error: (error) => {
         console.error(error);

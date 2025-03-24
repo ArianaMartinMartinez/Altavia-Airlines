@@ -25,6 +25,7 @@
                         [isAdmin]="isAdmin"
                         [isBooked]="bookedFlightsList.includes((flight.id).toString())"
                         (flightBooked)="setBooking($event)"
+                        (flightDeleted)="deleteFlight($event)"
                     ></app-flight-card>
                 </ng-container>
                 

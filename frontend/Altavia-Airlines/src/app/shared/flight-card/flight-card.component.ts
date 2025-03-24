@@ -17,6 +17,7 @@ export class FlightCardComponent implements OnInit {
   @Input() isAdmin: boolean = false;
 
   @Output() flightBooked: EventEmitter<string> = new EventEmitter<string>();
+  @Output() flightDeleted: EventEmitter<string> = new EventEmitter<string>();
 
   loggedIn: boolean = false;
 
@@ -35,5 +36,9 @@ export class FlightCardComponent implements OnInit {
 
   booked(id: number) {
     this.flightBooked.emit(id.toString());
+  }
+
+  deleteFlight(id: number) {
+    this.flightDeleted.emit(id.toString());
   }
 }
