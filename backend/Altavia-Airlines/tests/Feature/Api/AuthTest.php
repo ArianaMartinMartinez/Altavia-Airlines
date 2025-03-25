@@ -59,7 +59,7 @@ class AuthTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'test',
         ]);
-        $data = ['error' => 'Unauthorized'];
+        $data = ['error' => 'Email or password not correct'];
 
         $response->assertStatus(401)
             ->assertJsonFragment($data);
