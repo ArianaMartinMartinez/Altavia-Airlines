@@ -23,10 +23,10 @@ app-flights-filter {
     text-align: center;
 }
 
-.btn-primary {
+.btn-primary, .btn-submit {
     transition: transform 0.5s ease;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-submit:hover {
     transform: scale(1.2);
 }

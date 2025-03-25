@@ -24,7 +24,9 @@
         <a [routerLink]="['/flight-detail', flight.id]">
             <i class="fa-solid fa-circle-info"></i>
         </a>
-        <i class="fa-solid fa-pen-to-square"></i>
-        <div (click)="deleteFlight(flight.id)"><i class="fa-solid fa-trash" ></i></div>
+        <a [routerLink]="['/edit-flight', flight.id]">
+            <i class="fa-solid fa-pen-to-square"></i>
+        </a>
+        <div (click)="deleteFlight(flight.id)" style="cursor: pointer;"><i class="fa-solid fa-trash" ></i></div>
     </div>
 </div>

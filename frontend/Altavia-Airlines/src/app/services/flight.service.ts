@@ -36,6 +36,10 @@ export class FlightService {
     return this.http.post<Flight>(`${this.url}/flights`, data);
   }
 
+  editFlight(id: string, data: any): Observable<Flight> {
+    return this.http.put<Flight>(`${this.url}/flights/${id}`, data);
+  }
+
   deleteFlight(id: string, token: any): Observable<any> {
     return this.http.delete(`${this.url}/flights/${id}`, {params: token});
   }

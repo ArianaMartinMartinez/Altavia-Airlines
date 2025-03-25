@@ -1,0 +1,19 @@
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.container {
+    width: 50%;
+}
+
+form {
+    font-size: large;
+}
+
+h2 {
+    text-align: center;
+}

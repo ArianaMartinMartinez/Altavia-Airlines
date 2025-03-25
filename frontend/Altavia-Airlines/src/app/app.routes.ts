@@ -8,6 +8,7 @@ import { BookingsComponent } from './pages/bookings/bookings.component';
 import { AuthGuard } from './auth.guard';
 import { FlightDetailComponent } from './pages/flights/admin/flight-detail/flight-detail.component';
 import { NewFlightComponent } from './pages/flights/admin/new-flight/new-flight.component';
+import { EditFlightComponent } from './pages/flights/admin/edit-flight/edit-flight.component';
 
 export const routes: Routes = [
     {
@@ -31,6 +32,12 @@ export const routes: Routes = [
     {
         path: 'new-flight',
         component: NewFlightComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'admin' },
+    },
+    {
+        path: 'edit-flight/:id',
+        component: EditFlightComponent,
         canActivate: [AuthGuard],
         data: { role: 'admin' },
     },
