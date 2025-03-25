@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Flight } from '../models/flight';
-import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment';
 import { Observable } from 'rxjs';
 
@@ -30,6 +30,10 @@ export class FlightService {
 
   getFlightById(id: string, token: any): Observable<any> {
     return this.http.get(`${this.url}/flights/${id}`, {params: token});
+  }
+
+  createNewFlight(data: any): Observable<Flight> {
+    return this.http.post<Flight>(`${this.url}/flights`, data);
   }
 
   deleteFlight(id: string, token: any): Observable<any> {

@@ -10,7 +10,7 @@
                 <a [routerLink]="['/oldFlights']">
                     <button type="button" class="btn btn-primary">Old flights</button>
                 </a>
-                <a [routerLink]="['']" *ngIf="isAdmin">
+                <a [routerLink]="['/new-flight']" *ngIf="isAdmin">
                     <button type="button" class="btn btn-submit">New flight</button>
                 </a>
             </div>

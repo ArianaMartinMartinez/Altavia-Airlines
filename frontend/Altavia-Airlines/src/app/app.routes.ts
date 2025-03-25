@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
 import { AuthGuard } from './auth.guard';
 import { FlightDetailComponent } from './pages/flights/admin/flight-detail/flight-detail.component';
+import { NewFlightComponent } from './pages/flights/admin/new-flight/new-flight.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,12 @@ export const routes: Routes = [
     {
         path: 'flight-detail/:id',
         component: FlightDetailComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'admin' },
+    },
+    {
+        path: 'new-flight',
+        component: NewFlightComponent,
         canActivate: [AuthGuard],
         data: { role: 'admin' },
     },

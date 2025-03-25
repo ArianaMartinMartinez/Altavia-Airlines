@@ -1,0 +1,62 @@
+<div>
+    <div class="d-flex justify-content-center align-items-center">
+        <app-loader *ngIf="!hasLoaded; else newFlightPage"></app-loader>
+    </div>
+
+    <ng-template #newFlightPage>
+        <div class="container mt-5">
+            <h2>New flight</h2>
+            <form [formGroup]="newFlightForm" (submit)="submit()">
+                <div class="mt-3">
+                    <label for="date" class="form-label">Date:</label>
+                    <input type="date" class="form-control" formControlName="date" id="date" required>
+                    <div class="text-danger" *ngIf="newFlightForm.get('date')?.invalid && newFlightForm.get('date')?.touched">
+                        Date is required
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="price" class="form-label">Price (€):</label>
+                    <input type="number" class="form-control" formControlName="price" id="price" required>
+                    <div class="text-danger" *ngIf="newFlightForm.get('price')?.invalid && newFlightForm.get('price')?.touched">
+                        Price is required and min 1
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="airplane" class="form-label">Airplane:</label>
+                    <select class="form-select" formControlName="airplane_id" id="airplane" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option *ngFor="let airplane of airplanesList" [value]="airplane.id">{{ airplane.name }}</option>
+                      </select>
+                    <div class="text-danger" *ngIf="newFlightForm.get('airplane_id')?.invalid && newFlightForm.get('airplane_id')?.touched">
+                        Airplane is required
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="departure" class="form-label">Departure city:</label>
+                    <select class="form-select" formControlName="departure_id" id="departure" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option *ngFor="let city of citiesList" [value]="city.id">{{ city.name }}</option>
+                      </select>
+                    <div class="text-danger" *ngIf="newFlightForm.get('departure_id')?.invalid && newFlightForm.get('departure_id')?.touched">
+                        Departure city is required
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label for="arrival" class="form-label">Arrival city:</label>
+                    <select class="form-select" formControlName="arrival_id" id="arrival" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option *ngFor="let city of citiesList" [value]="city.id">{{ city.name }}</option>
+                      </select>
+                    <div class="text-danger" *ngIf="newFlightForm.get('arrival_id')?.invalid && newFlightForm.get('arrival_id')?.touched">
+                        Arrival city is required
+                    </div>
+                </div>
+
+                <div class="actionButtons m-3">
+                    <button type="submit" class="btn btn-submit">Confirm</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+</div>
