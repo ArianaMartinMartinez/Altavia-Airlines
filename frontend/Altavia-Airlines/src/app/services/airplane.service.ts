@@ -16,6 +16,10 @@ export class AirplaneService {
     return this.http.get<Airplane[]>(`${this.url}/airplanes`, {params: token});
   }
 
+  createNewAirplane(data: any): Observable<Airplane> {
+    return this.http.post<Airplane>(`${this.url}/airplanes`, data);
+  }
+
   deleteAirplane(id: string, token: any): Observable<any> {
     return this.http.delete(`${this.url}/airplanes/${id}`, {params: token});
   }

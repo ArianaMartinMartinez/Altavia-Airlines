@@ -10,6 +10,7 @@ import { FlightDetailComponent } from './pages/flights/admin/flight-detail/fligh
 import { NewFlightComponent } from './pages/flights/admin/new-flight/new-flight.component';
 import { EditFlightComponent } from './pages/flights/admin/edit-flight/edit-flight.component';
 import { AirplanesComponent } from './pages/airplanes/airplanes.component';
+import { NewAirplaneComponent } from './pages/airplanes/new-airplane/new-airplane.component';
 
 export const routes: Routes = [
     {
@@ -60,6 +61,12 @@ export const routes: Routes = [
         component: AirplanesComponent,
         canActivate: [AuthGuard],
         data: { RouterLink: 'admin' },
+    },
+    {
+        path: 'new-airplane',
+        component: NewAirplaneComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'admin' },
     },
     {
         path: '',
