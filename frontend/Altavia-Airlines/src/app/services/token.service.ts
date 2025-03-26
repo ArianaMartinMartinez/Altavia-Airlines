@@ -29,7 +29,10 @@ export class TokenService {
       const payload = this.payload(token);
 
       if(payload) {
-        return (payload.iss === 'http://127.0.0.1:8000/api/auth/login') ? true : false;
+        const isIssuerValid = (payload.iss === 'http://127.0.0.1:8000/api/auth/login') ? true : false;
+        const isNotExpired = payload.exp > Math.floor(Date.now() / 1000);
+
+        return isIssuerValid && isNotExpired;
       }
     }
 
