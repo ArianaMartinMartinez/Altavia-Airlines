@@ -1,0 +1,30 @@
+<div>
+    <div class="d-flex justify-content-center align-items-center">
+        <app-loader *ngIf="!hasLoaded; else airplanesPage"></app-loader>
+    </div>
+
+    <ng-template #airplanesPage>
+        <div class="d-flex flex-column align-items-center container">
+            <h2 class="mt-5">Airplanes</h2>
+
+            <a [routerLink]="['/']" class="m-3">
+                <button type="button" class="btn btn-submit">New airplane</button>
+            </a>
+
+            <div class="mt-2 container airplanesContainer">
+                <ng-container *ngIf="airplanesList.length > 0; else noAirplanes">
+                    <app-airplane-card
+                        *ngFor="let airplane of airplanesList"
+                        [airplane]="airplane"
+                    ></app-airplane-card>
+                </ng-container>
+                
+                <ng-template #noAirplanes>
+                    <h3>
+                        No airplanes.
+                    </h3>
+                </ng-template>
+            </div>
+        </div>
+    </ng-template>
+</div>

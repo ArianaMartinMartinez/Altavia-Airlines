@@ -1,14 +1,15 @@
-import { Routes } from '@angular/router';
+import { RouterLink, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { FlightsComponent } from './pages/flights/flights.component';
 import { OldFlightsComponent } from './pages/flights/old-flights/old-flights.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BookingsComponent } from './pages/bookings/bookings.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { FlightDetailComponent } from './pages/flights/admin/flight-detail/flight-detail.component';
 import { NewFlightComponent } from './pages/flights/admin/new-flight/new-flight.component';
 import { EditFlightComponent } from './pages/flights/admin/edit-flight/edit-flight.component';
+import { AirplanesComponent } from './pages/airplanes/airplanes.component';
 
 export const routes: Routes = [
     {
@@ -53,6 +54,12 @@ export const routes: Routes = [
         path: 'my-bookings',
         component: BookingsComponent,
         canActivate: [AuthGuard],
+    },
+    {
+        path: 'airplanes',
+        component: AirplanesComponent,
+        canActivate: [AuthGuard],
+        data: { RouterLink: 'admin' },
     },
     {
         path: '',
