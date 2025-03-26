@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../../shared/loader/loader.component';
 import { AirplaneCardComponent } from '../../shared/airplane-card/airplane-card.component';
 import { RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-airplanes',
@@ -38,6 +39,28 @@ export class AirplanesComponent {
       },
       complete: () => {
         this.hasLoaded = true;
+      }
+    });
+  }
+
+  deleteAirplane(id: string) {
+    const token = {
+      token: this.tokenService.get(),
+    }
+
+    this.airplaneService.deleteAirplane(id, token).subscribe({
+      next: (rtn) => {
+        Swal.fire({
+          icon: "success",
+          text: rtn.message,
+        });
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      },
+      error: (error) => {
+        console.error(error);
       }
     });
   }

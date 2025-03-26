@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Airplane } from '../../models/airplane';
 
 @Component({
@@ -9,4 +9,10 @@ import { Airplane } from '../../models/airplane';
 })
 export class AirplaneCardComponent {
   @Input() airplane!: Airplane;
+
+  @Output() airplaneDeleted: EventEmitter<string> = new EventEmitter<string>();
+
+  deleteAirplane(id: number) {
+    this.airplaneDeleted.emit(id.toString());
+  }
 }

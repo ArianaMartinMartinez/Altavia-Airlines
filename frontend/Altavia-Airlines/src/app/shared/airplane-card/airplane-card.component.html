@@ -5,7 +5,9 @@
       
       <div class="adminTools">
         <i class="fa-solid fa-pen-to-square"></i>
-        <i class="fa-solid fa-trash" ></i>
+        <div (click)="deleteAirplane(airplane.id)" style="cursor: pointer;">
+          <i class="fa-solid fa-trash" ></i>
+        </div>
       </div>
     </div>
 </div>

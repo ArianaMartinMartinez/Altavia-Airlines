@@ -16,6 +16,7 @@
                     <app-airplane-card
                         *ngFor="let airplane of airplanesList"
                         [airplane]="airplane"
+                        (airplaneDeleted)="deleteAirplane($event)"
                     ></app-airplane-card>
                 </ng-container>
                 
