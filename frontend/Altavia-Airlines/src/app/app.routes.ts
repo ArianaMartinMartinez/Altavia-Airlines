@@ -11,6 +11,7 @@ import { NewFlightComponent } from './pages/flights/admin/new-flight/new-flight.
 import { EditFlightComponent } from './pages/flights/admin/edit-flight/edit-flight.component';
 import { AirplanesComponent } from './pages/airplanes/airplanes.component';
 import { NewAirplaneComponent } from './pages/airplanes/new-airplane/new-airplane.component';
+import { EditAirplaneComponent } from './pages/airplanes/edit-airplane/edit-airplane.component';
 
 export const routes: Routes = [
     {
@@ -65,6 +66,12 @@ export const routes: Routes = [
     {
         path: 'new-airplane',
         component: NewAirplaneComponent,
+        canActivate: [AuthGuard],
+        data: { role: 'admin' },
+    },
+    {
+        path: 'edit-airplane/:id',
+        component: EditAirplaneComponent,
         canActivate: [AuthGuard],
         data: { role: 'admin' },
     },

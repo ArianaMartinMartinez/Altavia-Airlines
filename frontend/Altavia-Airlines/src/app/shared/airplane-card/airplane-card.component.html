@@ -4,7 +4,9 @@
       <p class="card-text">{{ airplane.seats }} seats</p>
       
       <div class="adminTools">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <a [routerLink]="['/edit-airplane', airplane.id]">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </a>
         <div (click)="deleteAirplane(airplane.id)" style="cursor: pointer;">
           <i class="fa-solid fa-trash" ></i>
         </div>
