@@ -7,12 +7,15 @@
 
 This project consists of a website where the user can search and book flights. The user can see all the flights details including how many seats are available, the date, departure and arrival cities and how much it costs.
 
-If the user is registered and logged in, he/she can see a list of the flights he/she has booked, sorted by the earliest date. The user also has the option to cancel the flight if necessary.
+If the user is registered and logged in, he/she/they can see a list of the flights he/she/they has booked, sorted by the earliest date. The user also has the option to cancel the flight if necessary.
 
-## 💼 Proyect guide
+## 💼 Project overview
 
->[!NOTE]
->For this second sprint, the frontend isn't developed yet. You can see more information about the API on the backend's README.md
+In this project the first view we see is the home page, where we can see a *"Book now"* button that will take us to the flights page.
+
+![Home page](./frontend/Altavia-Airlines/public/docs/homePage.png)
+
+#### For more information about the website pages and functionalities check de [Frontend's documentation](./frontend/Altavia-Airlines/README.md)
 
 ## 📁 Project structure
 
@@ -21,12 +24,24 @@ This is a full-stack project, so the folder structure is as follows:
 - **backend/Altavia-Airlines** - Laravel 11
 - **frontend/Altavia-Airlines** - Angular 19
 
+## 🔍 Organization
+
+For this project I've used ***Jira*** in order to be able to better organize tasks to be done in every Sprint.
+
+Here's the *Cronogram*:
+
+![Jira's cronogram](./docs/cronogramaJira.png)
+
+And the *Backlog*:
+
+![Jira's backlog](./docs/backlogJira.png)
+
 ## ❓ Installation requirements
 
 You can see the installation requirements for the backend and frontend in each of their documentation:
 
 - [Backend Readme](./backend/Altavia-Airlines/README.md)
-- [Frontend Readme]()
+- [Frontend Readme](./frontend/Altavia-Airlines/README.md)
 
 ## 💻 Installation
 
@@ -41,7 +56,7 @@ See [backend Readme](./backend/Altavia-Airlines/README.md)
 
 3. Configure Frontend:
 
-See [Frontend Readme]()
+See [frontend Readme](./frontend/Altavia-Airlines/README.md)
 
 4. Run Backend:
 
@@ -97,4 +112,7 @@ This will generate an url that will lead you to the web similar to this one:
 
 This project was fully developed by: 
 
-[Ariana Martín Martínez](https://github.com/ArianaMartinMartinez)
+**Ariana Martín Martínez**
+
+<a href='https://github.com/ArianaMartinMartinez' target="_blank"><img alt='GitHub' src='https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=GitHub&logoColor=white&labelColor=181717&color=181717'/></a>
+<a href='https://www.linkedin.com/in/ariana-martin-martinez/' target="_blank"><img alt='LinkedIn' src='https://img.shields.io/badge/LinkedIn-100000?style=for-the-badge&logo=LinkedIn&logoColor=white&labelColor=0077B5&color=0077B5'/></a>
