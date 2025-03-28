@@ -34,7 +34,7 @@ In order to run and try this project locally you will need:
     cd backend/Altavia-Airlines
 ```
 
-3. Install Composer:
+3. Install project dependencies:
 ```
     composer install
 ```
@@ -282,7 +282,7 @@ This project has some protected routes with middlewares because only the admin u
 
 ## 👾 Tests
 
-This project has a **100%** of test coverage.
+This project has a **86.7%** of test coverage.
 
 You can try the tests and see the coverage in the terminal using:
 ```
